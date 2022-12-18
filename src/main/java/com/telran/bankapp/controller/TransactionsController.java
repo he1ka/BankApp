@@ -1,6 +1,6 @@
 package com.telran.bankapp.controller;
 
-import com.telran.bankapp.model.Transaction;
+import com.telran.bankapp.entity.Transaction;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
