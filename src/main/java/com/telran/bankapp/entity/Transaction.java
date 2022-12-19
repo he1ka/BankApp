@@ -1,10 +1,6 @@
 package com.telran.bankapp.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -16,8 +12,14 @@ public class Transaction {
     private Date creationDate;
     private String type;
     private Integer amount;
-    private long accountFromId;
-    private long accountToId;
+
+    @ManyToOne
+    @JoinColumn(name = "from_account", nullable = false)
+    private Account fromAccount;
+
+    @ManyToOne
+    @JoinColumn(name = "to_account", nullable = false)
+    private Account toAccount;
 
     public Transaction() {
     }
@@ -54,19 +56,19 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public long getAccountFromId() {
-        return accountFromId;
+    public Account getFromAccount() {
+        return fromAccount;
     }
 
-    public void setAccountFromId(long accountFromId) {
-        this.accountFromId = accountFromId;
+    public Account getToAccount() {
+        return toAccount;
     }
 
-    public long getAccountToId() {
-        return accountToId;
+    public void setFromAccount(Account fromAccount) {
+        this.fromAccount = fromAccount;
     }
 
-    public void setAccountToId(long accountToId) {
-        this.accountToId = accountToId;
+    public void setToAccount(Account toAccount) {
+        this.toAccount = toAccount;
     }
 }
