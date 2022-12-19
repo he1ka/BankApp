@@ -1,12 +1,7 @@
 package com.telran.bankapp.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.util.Date;
-import java.util.Objects;
+import javax.persistence.*;
+import java.util.*;
 
 @Entity
 @Table(name = "accounts")
@@ -21,6 +16,11 @@ public class Account {
     private String country;
     private String city;
     private Integer amount = 0;
+
+    @OneToMany(mappedBy = "fromAccount", fetch = FetchType.EAGER)
+    private List<Transaction> fromTransactions = new ArrayList<>();
+    @OneToMany(mappedBy = "toAccount", fetch = FetchType.EAGER)
+    private List<Transaction> toTransactions = new ArrayList<>();
 
     public Account() {
     }
@@ -87,6 +87,22 @@ public class Account {
 
     public void setAmount(Integer amount) {
         this.amount = amount;
+    }
+
+    public List<Transaction> getFromTransactions() {
+        return fromTransactions;
+    }
+
+    public void setFromTransactions(List<Transaction> fromTransactions) {
+        this.fromTransactions = fromTransactions;
+    }
+
+    public List<Transaction> getToTransactions() {
+        return toTransactions;
+    }
+
+    public void setToTransactions(List<Transaction> toTransactions) {
+        this.toTransactions = toTransactions;
     }
 
     public void increaseAmount(int change) {

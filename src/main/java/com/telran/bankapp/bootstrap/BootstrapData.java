@@ -1,6 +1,7 @@
 package com.telran.bankapp.bootstrap;
 
 import com.telran.bankapp.entity.Account;
+import com.telran.bankapp.entity.Transaction;
 import com.telran.bankapp.repository.AccountRepository;
 import com.telran.bankapp.repository.TransactionRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -37,6 +38,14 @@ public class BootstrapData implements CommandLineRunner {
         pawel.setCountry("Germany");
         pawel.setCity("Munich");
         accountRepository.save(pawel);
+
+        Transaction first = new Transaction();
+        first.setFromAccount(nick);
+        first.setToAccount(pawel);
+        first.setCreationDate(new Date());
+        first.setType("transfer");
+        first.setAmount(200);
+        transactionRepository.save(first);
 
         System.out.println("Number of accounts: " + accountRepository.count());
     }
