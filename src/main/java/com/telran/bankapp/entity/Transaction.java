@@ -11,7 +11,7 @@ public class Transaction {
     private long id;
     private Date creationDate;
     private String type;
-    private Integer amount;
+    private Double amount;
 
     @ManyToOne
     @JoinColumn(name = "from_account", nullable = false)
@@ -48,11 +48,11 @@ public class Transaction {
         this.type = type;
     }
 
-    public Integer getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 

@@ -15,11 +15,11 @@ public class Account {
     private String lastName;
     private String country;
     private String city;
-    private Integer amount = 0;
+    private Double amountOfMoney = 0.0;
 
-    @OneToMany(mappedBy = "fromAccount", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "fromAccount", fetch = FetchType.LAZY)
     private List<Transaction> fromTransactions = new ArrayList<>();
-    @OneToMany(mappedBy = "toAccount", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "toAccount", fetch = FetchType.LAZY)
     private List<Transaction> toTransactions = new ArrayList<>();
 
     public Account() {
@@ -81,44 +81,51 @@ public class Account {
         this.city = city;
     }
 
-    public Integer getAmount() {
-        return amount;
+    public Double getAmountOfMoney() {
+        return amountOfMoney;
     }
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
-
-    public List<Transaction> getFromTransactions() {
-        return fromTransactions;
+    public void setAmountOfMoney(Double amount) {
+        this.amountOfMoney = amount;
     }
 
     public void setFromTransactions(List<Transaction> fromTransactions) {
         this.fromTransactions = fromTransactions;
     }
 
-    public List<Transaction> getToTransactions() {
-        return toTransactions;
-    }
-
     public void setToTransactions(List<Transaction> toTransactions) {
         this.toTransactions = toTransactions;
     }
 
-    public void increaseAmount(int change) {
-        if (amount == null) {
-            amount = 0;
+    public void increaseAmount(Double change) {
+        if (amountOfMoney == null) {
+            amountOfMoney = 0.0;
         }
 
-        amount += change;
+        amountOfMoney += change;
     }
 
-    public void decreaseAmount(int change) {
-        if (amount == null) {
-            amount = 0;
+    public void decreaseAmount(Double change) {
+        if (amountOfMoney == null) {
+            amountOfMoney = 0.0;
         }
 
-        amount -= change;
+        amountOfMoney -= change;
+    }
+
+    public Set<Long> getTransactions()
+    {
+        Set<Long> result = new HashSet<>();
+
+        for (Transaction t: fromTransactions) {
+            result.add(t.getId());
+        }
+
+        for (Transaction t: toTransactions) {
+            result.add(t.getId());
+        }
+
+        return result;
     }
 
     @Override
