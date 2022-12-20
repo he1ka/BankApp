@@ -44,7 +44,7 @@ public class BootstrapData implements CommandLineRunner {
         first.setToAccount(pawel);
         first.setCreationDate(new Date());
         first.setType("transfer");
-        first.setAmount(200);
+        first.setAmount(200.0);
         transactionRepository.save(first);
 
         System.out.println("Number of accounts: " + accountRepository.count());
