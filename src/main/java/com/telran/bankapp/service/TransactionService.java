@@ -1,10 +1,12 @@
 package com.telran.bankapp.service;
 
+import com.telran.bankapp.entity.Account;
 import com.telran.bankapp.entity.Transaction;
 import com.telran.bankapp.exception.TransactionNotFoundException;
 import com.telran.bankapp.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -26,6 +28,18 @@ public class TransactionService {
     public Transaction getTransaction(Long id) {
         return transactionRepository.findById(id)
                 .orElseThrow(() -> new TransactionNotFoundException("id = " + id));
+    }
+
+    public Transaction createTransaction(Account fromAccount, Account toAccount, Double moneyAmount, String type)
+    {
+        Transaction transaction = new Transaction();
+        transaction.setFromAccount(fromAccount);
+        transaction.setToAccount(toAccount);
+        transaction.setAmount(moneyAmount);
+        transaction.setType(type);
+        transaction.setCreationDate(new Date());
+
+        return saveTransaction(transaction);
     }
 
 }

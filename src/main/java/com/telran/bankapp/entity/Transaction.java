@@ -56,12 +56,12 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public Account getFromAccount() {
-        return fromAccount;
+    public Long getAccountFrom() {
+        return fromAccount.getId();
     }
 
-    public Account getToAccount() {
-        return toAccount;
+    public Long getAccountTo() {
+        return toAccount.getId();
     }
 
     public void setFromAccount(Account fromAccount) {
