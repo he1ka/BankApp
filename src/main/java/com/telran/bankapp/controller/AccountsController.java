@@ -69,22 +69,7 @@ public class AccountsController {
      * - if account has not enough money to transfer, the response code is 400 with error explanation in response
      */
     @PutMapping("/accounts")
-    public void transferMoney(@RequestParam Integer from, @RequestParam Integer to, @RequestParam Integer amount) {
-//        Account fromAccount = getAccount(from);
-//        Account toAccount = getAccount(to);
-//
-//        if (fromAccount == null || toAccount == null) {
-//            throw new RuntimeException("Not found");
-//        }
-//
-//        if (fromAccount.getAmount() >= amount) {
-//            fromAccount.decreaseAmount(amount);
-//            toAccount.increaseAmount(amount);
-//            // @todo add transaction
-//        } else {
-//            throw new RuntimeException("Not enough money");
-//        }
-//
-//        return;
+    public void transferMoney(@RequestParam Long from, @RequestParam Long to, @RequestParam Double amount) {
+        accountService.transferMoney(from, to, amount);
     }
 }
