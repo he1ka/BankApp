@@ -1,6 +1,7 @@
 package com.telran.bankapp.entity;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.*;
 
 @Entity
@@ -10,7 +11,7 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String email;
-    private Date creationDate;
+    private LocalDate creationDate;
     private String firstName;
     private String lastName;
     private String country;
@@ -41,11 +42,11 @@ public class Account {
         this.email = email;
     }
 
-    public Date getCreationDate() {
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 

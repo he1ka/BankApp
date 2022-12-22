@@ -4,9 +4,12 @@ import com.telran.bankapp.entity.Account;
 import com.telran.bankapp.exception.AccountNotFoundException;
 import com.telran.bankapp.exception.NotEnoughMoneyException;
 import com.telran.bankapp.repository.AccountRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class AccountService {
@@ -18,7 +21,29 @@ public class AccountService {
         this.transactionService = transactionService;
     }
 
-    public List<Account> getAllAccounts() {
+    public List<Account> getAllAccounts(String date, List<String> cities, String sort) {
+        Sort sortCondition = Sort.by(Sort.Direction.ASC, "id");
+
+        if (Objects.equals(sort, "creationDate")) {
+            sortCondition = Sort.by(Sort.Direction.ASC, "creationDate");
+        }
+
+        if (Objects.equals(sort, "-creationDate")) {
+            sortCondition = Sort.by(Sort.Direction.DESC, "creationDate");
+        }
+
+        if (date != null && (cities == null || cities.isEmpty())) {
+            return accountRepository.findByCreationDate(LocalDate.parse(date), sortCondition);
+        }
+
+        if (date == null && cities != null && !cities.isEmpty()) {
+            return accountRepository.findByCityInIgnoreCase(cities, sortCondition);
+        }
+
+        if (date != null && cities != null && !cities.isEmpty()) {
+            return accountRepository.findByCreationDateAndCityInIgnoreCase(LocalDate.parse(date), cities, sortCondition);
+        }
+
         return accountRepository.findAll();
     }
 
