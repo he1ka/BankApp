@@ -5,6 +5,7 @@ import com.telran.bankapp.exception.AccountNotFoundException;
 import com.telran.bankapp.exception.NotEnoughMoneyException;
 import com.telran.bankapp.repository.AccountRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -57,6 +58,7 @@ public class AccountService {
                 .orElseThrow(() -> new AccountNotFoundException("id = " + id));
     }
 
+    @Transactional
     public void transferMoney(Long fromAccountId, Long toAccountId, Double moneyAmount) {
         Account fromAccount = getAccount(fromAccountId);
         Account toAccount = getAccount(toAccountId);
