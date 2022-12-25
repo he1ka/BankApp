@@ -3,6 +3,7 @@ package com.telran.bankapp.controller;
 import com.telran.bankapp.entity.Account;
 import com.telran.bankapp.service.AccountService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -22,9 +23,22 @@ public class AccountsController {
      * - accepts an optional query string parameter, sort, that can take one of two values: either "creationDate" or "-creationDate". If the value is "creationDate", then the ordering is by date in ascending order. If it is "-creationDate", then the ordering is by creationDate in descending order. If there are two records with the same creationDate, the one with the smaller id must come first.
      */
     @GetMapping("/accounts")
-    public List<Account> index() {
-        return accountService.getAllAccounts();
+    public List<Account> index(
+            @RequestParam(required = false) String date,
+            @RequestParam(required = false) List<String> city,
+            @RequestParam(required = false) String sort
+    ) {
+        return accountService.getAllAccounts(date, city, sort);
     }
+
+//    @GetMapping("/books")
+//    public List<Book> getAllBooks(@RequestParam(required = false) List<String> author,
+//                                  @RequestParam(required = false) String year,
+//                                  @RequestParam(required = false) String postfix) {
+//        System.out.println("author: " + author);
+//        System.out.println("year: " + year);
+//        System.out.println("postfix: " + postfix);
+//        return bookService.getAllBooks();
 
     /**
      * GET request to `/accounts/<id>`:

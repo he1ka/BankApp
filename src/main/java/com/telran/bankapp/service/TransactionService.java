@@ -6,6 +6,7 @@ import com.telran.bankapp.exception.TransactionNotFoundException;
 import com.telran.bankapp.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class TransactionService {
         transaction.setToAccount(toAccount);
         transaction.setAmount(moneyAmount);
         transaction.setType(type);
-        transaction.setCreationDate(new Date());
+        transaction.setCreationDate(LocalDate.now());
 
         return saveTransaction(transaction);
     }
