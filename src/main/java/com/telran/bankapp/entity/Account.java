@@ -3,6 +3,9 @@ package com.telran.bankapp.entity;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "accounts")
@@ -10,16 +13,31 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotBlank(message = "Email field should not be blank")
+    @Email(message = "Email should be valid")
     private String email;
-    private LocalDate creationDate;
+
+    @NotBlank(message = "First name field should not be blank")
     private String firstName;
+
+    @NotBlank(message = "Last name field should not be blank")
     private String lastName;
+
+    @NotBlank(message = "Country field should not be blank")
     private String country;
+
+    @NotBlank(message = "City field should not be blank")
     private String city;
+
+    @Min(value = 0, message = "Amount of money should not be less than 0")
     private Double amountOfMoney = 0.0;
+
+    private LocalDate creationDate;
 
     @OneToMany(mappedBy = "fromAccount", fetch = FetchType.LAZY)
     private List<Transaction> fromTransactions = new ArrayList<>();
+
     @OneToMany(mappedBy = "toAccount", fetch = FetchType.LAZY)
     private List<Transaction> toTransactions = new ArrayList<>();
 

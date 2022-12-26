@@ -1,8 +1,9 @@
 package com.telran.bankapp.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "transactions")
@@ -10,9 +11,14 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private LocalDate creationDate;
+
+    @NotBlank(message = "Transaction Type field should not be blank")
     private String type;
+
+    @DecimalMin(value = "0.01", message = "Amount should not be less than 0.01")
     private Double amount;
+
+    private LocalDate creationDate;
 
     @ManyToOne
     @JoinColumn(name = "from_account", nullable = false)
