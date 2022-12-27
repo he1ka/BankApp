@@ -31,15 +31,6 @@ public class AccountsController {
         return accountService.getAllAccounts(date, city, sort);
     }
 
-//    @GetMapping("/books")
-//    public List<Book> getAllBooks(@RequestParam(required = false) List<String> author,
-//                                  @RequestParam(required = false) String year,
-//                                  @RequestParam(required = false) String postfix) {
-//        System.out.println("author: " + author);
-//        System.out.println("year: " + year);
-//        System.out.println("postfix: " + postfix);
-//        return bookService.getAllBooks();
-
     /**
      * GET request to `/accounts/<id>`:
      * - returns a record with the given id
@@ -73,7 +64,6 @@ public class AccountsController {
     public Account update(@PathVariable String id, @RequestBody Account account) {
         return accountService.updateAccountById(Long.parseLong(id), account);
     }
-
 
     /**
      * PUT request to `/accounts?from=<fromId>&to=<toId>&amount=<moneyAmount>`:
