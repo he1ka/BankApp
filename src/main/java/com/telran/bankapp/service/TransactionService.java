@@ -4,16 +4,17 @@ import com.telran.bankapp.entity.Account;
 import com.telran.bankapp.entity.Transaction;
 import com.telran.bankapp.exception.TransactionNotFoundException;
 import com.telran.bankapp.repository.TransactionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Service
 public class TransactionService {
     private final TransactionRepository transactionRepository;
 
+    @Autowired
     public TransactionService(TransactionRepository transactionRepository) {
         this.transactionRepository = transactionRepository;
     }

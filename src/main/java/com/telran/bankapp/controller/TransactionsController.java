@@ -2,6 +2,7 @@ package com.telran.bankapp.controller;
 
 import com.telran.bankapp.entity.Transaction;
 import com.telran.bankapp.service.TransactionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 public class TransactionsController {
     private final TransactionService transactionService;
 
+    @Autowired
     public TransactionsController(TransactionService transactionService) {
         this.transactionService = transactionService;
     }
@@ -36,7 +38,7 @@ public class TransactionsController {
      * - if there is no record in the collection with the given id, the response code is 404
      */
     @GetMapping("/transactions/{id}")
-    public Transaction get(@PathVariable String id) {
-        return this.transactionService.getTransaction(Long.parseLong(id));
+    public Transaction get(@PathVariable Long id) {
+        return this.transactionService.getTransaction(id);
     }
 }

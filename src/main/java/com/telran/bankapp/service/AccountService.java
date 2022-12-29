@@ -4,6 +4,7 @@ import com.telran.bankapp.entity.Account;
 import com.telran.bankapp.exception.AccountNotFoundException;
 import com.telran.bankapp.exception.NotEnoughMoneyException;
 import com.telran.bankapp.repository.AccountRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,7 @@ public class AccountService {
     private final AccountRepository accountRepository;
     private final TransactionService transactionService;
 
+    @Autowired
     public AccountService(AccountRepository accountRepository, TransactionService transactionService) {
         this.accountRepository = accountRepository;
         this.transactionService = transactionService;

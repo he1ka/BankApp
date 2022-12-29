@@ -2,6 +2,7 @@ package com.telran.bankapp.controller;
 
 import com.telran.bankapp.entity.Account;
 import com.telran.bankapp.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 public class AccountsController {
     private final AccountService accountService;
 
+    @Autowired
     public AccountsController(AccountService accountService) {
         this.accountService = accountService;
     }
@@ -38,8 +40,8 @@ public class AccountsController {
      * - if there is no record in the collection with the given id, the response code is 404
      */
     @GetMapping("/accounts/{id}")
-    public Account get(@PathVariable String id) {
-        return accountService.getAccount(Long.parseLong(id));
+    public Account get(@PathVariable Long id) {
+        return accountService.getAccount(id);
     }
 
     /**
@@ -61,8 +63,8 @@ public class AccountsController {
      * - if there is no record in the collection with the given id, the response code is 404
      */
     @PatchMapping("/accounts/{id}")
-    public Account update(@PathVariable String id, @RequestBody Account account) {
-        return accountService.updateAccountById(Long.parseLong(id), account);
+    public Account update(@PathVariable Long id, @RequestBody Account account) {
+        return accountService.updateAccountById(id, account);
     }
 
     /**
